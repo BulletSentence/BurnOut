@@ -1,11 +1,15 @@
 import "dotenv/config"
-import express, { response } from "express";
+import express from "express";
+import { router } from "./routes"
 
 const app = express();
 var port = 4040
 
+app.use(express.json())
+app.use(router)
+
 app.get("/github", (request, response) => {
-    response.redirect(`https://github.com/login/oauth/authorize?client_id=${process.env.CLIENT_ID}`)
+    response.redirect(`https://github.com/login/oauth/authorize?scope=user&client_id=${process.env.CLIENT_ID}`)
 });
 
 app.get("/signin/callback", (request, response) => {
