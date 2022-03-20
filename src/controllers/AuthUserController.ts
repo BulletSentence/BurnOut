@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { AuthUserService } from "../services/AuthUserService";
 
-class AuthUserController {
+class AuthenticateUserController {
   async handle(request: Request, response: Response) {
     const { code } = request.body;
 
@@ -10,9 +10,9 @@ class AuthUserController {
       const result = await service.execute(code);
       return response.json(result);
     } catch (err) {
-      return response.json();
+      return response.json({ error: err });
     }
   }
 }
 
-export { AuthUserController };
+export { AuthenticateUserController };
